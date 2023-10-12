@@ -1,0 +1,88 @@
+@import "./mixins.scss";
+@import "./colors.scss";
+
+.product-container {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1rem;
+  background-color: $gray;
+  padding: 2rem;
+  position: relative;
+  .product-cart-container-side {
+    position: fixed;
+    top: 50vh;
+    right: 0;
+    transform: translateY(-50%);
+    background-color: $accent2;
+    color: $white;
+    padding: 1rem 2rem;
+    border-top-left-radius: 1rem;
+    border-bottom-left-radius: 1rem;
+    .product-cart-items {
+      @include flexBox(row,center,center);
+      margin-bottom: 1rem;
+      @include mediumFont(0.9rem);
+      .product-cart-items-p {
+        margin-left: 0.5rem;
+      }
+    }
+    .product-cart-price {
+      @include button(0.5rem 1rem, $white, $accent2, $white, $accent2);
+      border-radius: 0.5rem;
+      @include mediumFont(1rem);
+    }
+  }
+  .product-card {
+    background-color: $white;
+    border-radius: 0.5rem;
+    box-shadow: 0px 0px 5px 2px rgba(232, 233, 235, 0.3);
+    padding: 1rem;
+    .product-discount {
+      @include regularFont(0.8rem);
+      color: $white;
+      background-color: $accent2;
+      width: fit-content;
+      padding: 0.2rem;
+      border-radius: 0.2rem;
+      float: right;
+      clear: both;
+    }
+    .product-img-container {
+      @include flexBox(column, center, center);
+      .product-image {
+        width: calc((100vw - 30rem) / 5);
+        margin: 0 auto;
+      }
+    }
+    .price-container {
+      margin-top: 1.2rem;
+      @include flexBox(row, center, flex-start);
+      .product-price {
+        margin-right: 0.5rem;
+        @include mediumFont(0.8rem);
+      }
+      .product-price-strike {
+        @include regularFont(0.8rem);
+        text-decoration: line-through;
+        color: $gray1;
+      }
+    }
+    .product-name {
+      @include regularFont(1rem);
+      margin-bottom: 1rem;
+    }
+    .product-cart-container {
+      @include regularFont(1rem);
+      @include flexBox(row, center, flex-start);
+      width: 100%;
+      flex-grow: 1;
+      .product-cart-btn {
+        width: 90%;
+        @include button(0.5rem 0.5rem, $gray, $black, $accent, $white);
+      }
+      .product-action-btn {
+        @include button(0.5rem 0.5rem, $gray, $black, $accent2, $white);
+      }
+    }
+  }
+}
