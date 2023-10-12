@@ -3,26 +3,29 @@
 import { BsFillBagCheckFill } from "react-icons/bs";
 
 import "../styles/productList.scss";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { addToCart, removeFromCart } from "../redux/slice/cartSlice";
 // import cartContext from "../context/cartContext";
 
 export default function ProductList() {
   // const products = useContext(productsContext);
   // const { cart, dispatch } = useContext(cartContext);
   const products = useSelector(state => state.Products.value)
+  const cart = useSelector(state => state.Cart.value)
+  const dispatch = useDispatch();
   return (
     <div className="product-container">
-      {/* <div className="product-cart-container-side">
+      <div className="product-cart-container-side">
         <div className="product-cart-items">
           <BsFillBagCheckFill className="cart-icon" />
           <p className="product-cart-items-p">{cart.products.length} item{cart.products.length >1 && "s" }</p>
         </div>
         <button className="product-cart-price">${cart.totalPrice}</button>
-      </div> */}
+      </div>
       {products?.data?.map((e, i) => {
-        // const product = cart.products.find(p => p.id == e.id);
+        const product = cart.products.find(p => p.id == e.id);
         let cartQty = 0;
-        // if(product) cartQty = product.productQty;
+        if(product) cartQty = product.productQty;
         return (
           <div key={i} className="product-card">
             {e.sale_price && (
@@ -48,22 +51,22 @@ export default function ProductList() {
               {cartQty > 0 && (
                 <button
                   className="product-action-btn"
-                  // onClick={() =>
-                  //   dispatch({ type: "removeFromCart", payload: e })
-                  // }
+                  onClick={() =>
+                    dispatch(removeFromCart(e))
+                  }
                 >
                   -
                 </button>
               )}
               <button
                 className="product-cart-btn"
-                // onClick={() => dispatch({ type: "addToCart", payload: e })}
+                onClick={() => dispatch(addToCart(e))}
               >
                 {cartQty > 0 ? cartQty : "Add"}
               </button>
               <button
                 className="product-action-btn"
-                // onClick={() => dispatch({ type: "addToCart", payload: e })}
+                onClick={() => dispatch(addToCart(e))}
               >
                 +
               </button>
