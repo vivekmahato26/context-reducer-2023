@@ -1,0 +1,1 @@
+export const apiUrl = "https://mock.redq.io/api/products?searchJoin=and&with=type%3Bauthor&limit=30&language=en&page=1&search=type.slug:grocery%3Bstatus:publish";
